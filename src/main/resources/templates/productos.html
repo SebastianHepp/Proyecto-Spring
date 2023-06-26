@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Reservations</title>
+
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    </head>
+    <body>
+
+        <div>
+            <div th:insert="fragments/nav :: nav"></div>
+            <div class="container" style="padding-top: 10vh; display: flex; flex-direction: column; align-items: center;">
+                <h3>Welcome</h3>
+                <br>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Pantalla</th>
+                            <th scope="col">Almacenamiento</th>
+                            <th scope="col">RAM</th>
+                            <th scope="col">Sistema Operativo</th>
+                            <th scope="col">Procesador</th>
+                            <th scope="col">Información</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="producto : ${productos}">
+                            <td th:text="${producto.getNombre()}"></td>
+                            <td th:text="${producto.getDescripcion()}"></td>
+                            <td th:text="${producto.getPantalla()}"></td>
+                            <td th:text="${producto.getAlmacenamiento()}"></td>
+                            <td th:text="${producto.getRam()}"></td>
+                            <td th:text="${producto.getSitemaOperativo()}"></td>
+                            <td th:text="${producto.getProcesador()}"></td>
+                            <td th:text="${producto.getInfo()}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#createProductoModal"
+                    >
+                    Create Producto
+                </button>
+
+                <!-- Modal -->
+                <div
+                    class="modal fade"
+                    id="createProductoModal"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="createProductoModalTitle"
+                    aria-hidden="true"
+                    >
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="createProductoModalTitle">
+                                    Create Producto
+                                </h5>
+                                <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                    >
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <form
+                                    action="#"
+                                    th:action="@{/productos-submit}"
+                                    th:object="${producto}"
+                                    method="post"
+                                    >
+                                    <div class="form-group row">
+                                        <label for="type-select" class="col-2 col-form-label"
+                                               >Producto</label
+                                        >
+                                        <div class="form-group row">
+                                            <label for="nombre" class="col-2 col-form-label"
+                                                   >Nombre</label
+                                            >
+                                            <div class="col-10">
+                                                <input
+                                                    class="form-control"
+                                                    id="nombre"
+                                                    name="nombre"
+                                                    th:field="*{nombre}"
+                                                    />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="descripcion" class="col-2 col-form-label"
+                                                   >Descripción</label
+                                            >
+                                            <div class="col-10">
+                                                <input
+                                                    class="form-control"
+                                                    id="descripcion"
+                                                    name="descripcion"
+                                                    th:field="*{descripcion}"
+                                                    />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="pantalla" class="col-2 col-form-label">Pantalla</label>
+                                            <div class="col-10">
+                                                <input
+                                                    class="form-control"
+                                                    id="pantalla"
+                                                    name="pantalla"
+                                                    th:field="*{pantalla}"
+                                                    />
+
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="almacenamiento" class="col-2 col-form-label">Almacenamiento</label>
+                                            <div class="col-10">
+                                                <input
+                                                    class="form-control"
+                                                    id="almacenamiento"
+                                                    name="almacenamiento"
+                                                    th:field="*{almacenamiento}"
+                                                    />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="ram" class="col-2 col-form-label">RAM</label>
+                                            <div class="col-10">
+                                                <input
+                                                    class="form-control"
+                                                    id="ram"
+                                                    name="ram"
+                                                    th:field="*{ram}"
+                                                    />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="sitemaOperativo" class="col-2 col-form-label">Sistema Operativo</label>
+                                            <div class="col-10">
+                                                <input
+                                                    class="form-control"
+                                                    id="sitemaOperativo"
+                                                    name="sitemaOperativo"
+                                                    th:field="*{sitemaOperativo}"
+                                                    />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="procesador" class="col-2 col-form-label">Procesador</label>
+                                            <div class="col-10">
+                                                <input
+                                                    class="form-control"
+                                                    id="procesador"
+                                                    name="procesador"
+                                                    th:field="*{procesador}"
+                                                    />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="info" class="col-2 col-form-label">Info: </label>
+                                            <div class="col-10">
+                                                <input
+                                                    class="form-control"
+                                                    id="info"
+                                                    name="info"
+                                                    th:field="*{info}"
+                                                    />
+                                            </div>
+                                        </div> 
+                                        <div class="modal-footer">
+                                            <button
+                                                type="button"
+                                                class="btn btn-secondary"
+                                                data-dismiss="modal"
+                                                >
+                                                Cerrar
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" value="Submit">
+                                                Guardar cambios
+                                            </button>
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+            <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+            <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+
+    </body>
+</html>
